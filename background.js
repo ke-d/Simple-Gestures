@@ -1,3 +1,10 @@
+function openLinkInTab(URL, switchToTab) {
+	browser.tabs.create({
+		url: URL,
+		active: switchToTab
+	});
+}
+
 
 //Sets up the background page on startup
 function onStartUp() {
@@ -5,7 +12,7 @@ function onStartUp() {
 	.then(function(items) {
 		//Checks to see if these settings are in storage, if not create and set the default
 
-	}).catch(onError);
+	});
 }
 
 
