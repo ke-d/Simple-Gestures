@@ -9,6 +9,7 @@ window.addEventListener("mousedown", function(e) {
     window.addEventListener("contextmenu", stopContextMenu);
     changedDirectionX = e.pageX;
     changedDirectionY = e.pageY;
+    url = e.target.href;
     window.addEventListener("mousemove", getMouseDirection, false);
   }
 });
@@ -17,15 +18,25 @@ if(rightclick) {
   if(direction === "") {
     window.removeEventListener("contextmenu", stopContextMenu);
   }
-  window.removeEventListener("mousemove", getMouseDirection, false);
-  console.log(direction);
+  if(direction !== "") {
+    console.log(direction);
+    console.log(url);
+    browser.runtime.sendMessage({
+      gesture: direction,
+      targeturl: url
+    });
+  }
+    direction = "";
+    currentDirection = "";
+    url = "";
 
-  direction = "";
-  currentDirection = "";
+  
+
   
 }
 
 });
+var url = "";
 var rightclick;
 var direction = "";
 var currentDirection = "";
@@ -48,18 +59,18 @@ function changedDirection(e) {
 }
 
 function getMouseDirection(e) {
-  if (oldX < e.pageX && (changedDirectionX + range < e.pageX || currentDirection === "L" && changedDirectionX + range/5 < e.pageX) && currentDirection !== "R") {
-    currentDirection = "R";
-    changedDirection(e);
-  } else if(oldX > e.pageX && (changedDirectionX - range > e.pageX || currentDirection === "R" && changedDirectionX - range/5 > e.pageX) && currentDirection !== "L") {
-    currentDirection = "L";
-    changedDirection(e);
-  } else if (oldY < e.pageY && (changedDirectionY + range < e.pageY || currentDirection === "U" && changedDirectionY + range/5 < e.pageY) && currentDirection !== "D") {
-    currentDirection = "D";
-    changedDirection(e);
-  } else if (oldY > e.pageY && (changedDirectionY - range > e.pageY || currentDirection === "D" && changedDirectionY - range/5 > e.pageY) && currentDirection !== "U"){
-    currentDirection = "U";
-    changedDirection(e);
+  if (oldX < e.pageX && (changedDirectionX + 2 < e.pageX && direction === "" || changedDirectionX + range < e.pageX || currentDirection === "L") && currentDirection !== "R") {
+      currentDirection = "R";
+      changedDirection(e);
+  } else if(oldX > e.pageX && (changedDirectionX - 2 > e.pageX && direction === "" || changedDirectionX - range > e.pageX || currentDirection === "R") && currentDirection !== "L") {
+      currentDirection = "L";
+      changedDirection(e);
+  } else if (oldY < e.pageY && (changedDirectionY + 2 < e.pageY && direction === "" || changedDirectionY + range < e.pageY || currentDirection === "U") && currentDirection !== "D") {
+      currentDirection = "D";
+      changedDirection(e);
+  } else if (oldY > e.pageY && (changedDirectionY - 2 > e.pageY && direction === "" || changedDirectionY - range > e.pageY || currentDirection === "D") && currentDirection !== "U"){
+      currentDirection = "U";
+      changedDirection(e);
   }
 
   oldX = e.pageX;
