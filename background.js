@@ -1,7 +1,8 @@
 function openLinkInTab(URL, switchToTab, index) {
 	browser.tabs.create({
 		url: URL,
-		active: switchToTab
+		active: switchToTab,
+		index: index
 	});
 }
 
