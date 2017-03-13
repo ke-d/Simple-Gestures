@@ -40,7 +40,7 @@ var direction = "";
 var currentDirection = "";
 
 var txt = document.createElement("div");
-document.body.appendChild(txt);
+//window.appendChild(txt);
 txt.style.position = "absolute";
 txt.style.display = "none";
 

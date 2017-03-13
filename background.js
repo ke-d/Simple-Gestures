@@ -27,7 +27,6 @@ function setDefaults() {
 }
 
 function handleMessage(request, sender, sendResponse) {
-	sendResponse({});
 	if(request.gesture === "U" && request.targeturl !== undefined) {
 		browser.tabs.query({currentWindow: true, active: true})
 		.then(function(tabs) {
@@ -81,7 +80,7 @@ function handleMessage(request, sender, sendResponse) {
 			});
 		});
 	}
-	
+	return true;
 }
 
 browser.runtime.onMessage.addListener(handleMessage);
