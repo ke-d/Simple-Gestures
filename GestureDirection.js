@@ -37,7 +37,6 @@ if(rightclick) {
 var url = "";
 var rightclick;
 var direction = "";
-var currentDirection = "";
 
 var txt = document.createElement("div");
 //window.appendChild(txt);
@@ -47,42 +46,42 @@ txt.style.display = "none";
 var oldX = 0;
 var oldY = 0;
 
-var changedDirectionX = 0;
-var changedDirectionY = 0;
-var range = 100;
 
 function stopContextMenu(e) {
   e.preventDefault();
   return false;
 }
-function changedDirection(e) {
-  changedDirectionX = e.pageX;
-  changedDirectionY = e.pageY;
-  direction += currentDirection;
-  txt.innerHTML = direction + " ";
-  txt.style.display = "";
-}
+
 
 function getMouseDirection(e) {
   txt.style.left = (e.pageX + 15) + "px";
   txt.style.top = (e.pageY - 10) + "px";
 
-  if (oldX < e.pageX && (changedDirectionX + 2 < e.pageX && direction === "" || changedDirectionX + range < e.pageX || currentDirection === "L") && currentDirection !== "R") {
-      currentDirection = "R";
-      changedDirection(e);
-  } else if(oldX > e.pageX && (changedDirectionX - 2 > e.pageX && direction === "" || changedDirectionX - range > e.pageX || currentDirection === "R") && currentDirection !== "L") {
-      currentDirection = "L";
-      changedDirection(e);
-  } else if (oldY < e.pageY && (changedDirectionY + 2 < e.pageY && direction === "" || changedDirectionY + range < e.pageY || currentDirection === "U") && currentDirection !== "D") {
-      currentDirection = "D";
-      changedDirection(e);
-  } else if (oldY > e.pageY && (changedDirectionY - 2 > e.pageY && direction === "" || changedDirectionY - range > e.pageY || currentDirection === "D") && currentDirection !== "U"){
-      currentDirection = "U";
-      changedDirection(e);
+  var x = e.screenX;
+  var y = e.screenY;
+  var lastX = oldX;
+  var lastY = oldY;
+  var subX = x - lastX;
+  var subY = y - lastY;
+  var distX = (subX > 0 ? subX : (-subX));
+  var distY= (subY > 0 ? subY : (-subY));
+  var currentDirection;
+  
+  if(distX < 10 && distY < 10) {
+    return;
   }
-
-  oldX = e.pageX;
-  oldY = e.pageY;
+  if(distX > distY) {
+    currentDirection = subX < 0 ? "L" : "R";
+  } else {
+    currentDirection = subY < 0 ? "U" : "D";
+  }
+  if(currentDirection !== direction.charAt(direction.length - 1)) {
+    direction += currentDirection;
+    txt.innerHTML = direction + " ";
+    txt.style.display = "";
+  }
+  oldX = x;
+  oldY = y;
 
 }
 
