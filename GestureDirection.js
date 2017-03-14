@@ -6,9 +6,11 @@ window.addEventListener("mousedown", function(e) {
   else if (e.button) rightclick = (e.button == 2);
   //console.log(rightclick);
   if(rightclick) {
+    direction = "";
+    url = "";
     window.addEventListener("contextmenu", stopContextMenu);
-    changedDirectionX = e.pageX;
-    changedDirectionY = e.pageY;
+    oldX = e.screenX;
+    oldY = e.screenY;
     url = e.target.href;
     window.addEventListener("mousemove", getMouseDirection, false);
   }
@@ -29,19 +31,13 @@ if(rightclick) {
   }
     
   }
-  txt.style.display = "none";
-  direction = "";
-  currentDirection = "";
-  url = "";
+  
+  
 });
 var url = "";
 var rightclick;
 var direction = "";
 
-var txt = document.createElement("div");
-//window.appendChild(txt);
-txt.style.position = "absolute";
-txt.style.display = "none";
 
 var oldX = 0;
 var oldY = 0;
@@ -54,8 +50,6 @@ function stopContextMenu(e) {
 
 
 function getMouseDirection(e) {
-  txt.style.left = (e.pageX + 15) + "px";
-  txt.style.top = (e.pageY - 10) + "px";
 
   var x = e.screenX;
   var y = e.screenY;
@@ -77,8 +71,6 @@ function getMouseDirection(e) {
   }
   if(currentDirection !== direction.charAt(direction.length - 1)) {
     direction += currentDirection;
-    txt.innerHTML = direction + " ";
-    txt.style.display = "";
   }
   oldX = x;
   oldY = y;
