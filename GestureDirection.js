@@ -18,7 +18,7 @@ window.addEventListener("mousedown", function(e) {
       
       //console.log(node.nodeName);
       node = node.parentElement;
-      if(node.nodeName === "BODY") {
+      if(node.nodeName === "BODY" || node.nodeName === "HTML") {
         break;
       }
     }
