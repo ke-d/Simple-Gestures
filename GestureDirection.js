@@ -11,7 +11,18 @@ window.addEventListener("mousedown", function(e) {
     window.addEventListener("contextmenu", stopContextMenu);
     oldX = e.screenX;
     oldY = e.screenY;
-    url = e.target.href;
+    
+    let node = e.target;
+    console.log(e.nodeName);
+    while(!node.hasAttribute("href")) {
+      
+      //console.log(node.nodeName);
+      node = node.parentElement;
+      if(node.nodeName === "BODY") {
+        break;
+      }
+    }
+    url = node.href;
     window.addEventListener("mousemove", getMouseDirection, false);
     textChainNode.style.display = "";
   }
