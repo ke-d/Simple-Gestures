@@ -26,8 +26,9 @@
   ],
   "content_scripts": [
     {
-      "all_frames":true,
-      "run_at":"document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "run_at": "document_end",
       "matches": ["<all_urls>"],
       "js": [
         "global_files/browser-polyfill.js",
@@ -38,5 +39,5 @@
   ],  
   "manifest_version": 2,
   "name": "Simple Gestures",
-  "version": "0.5.1"
+  "version": "0.5.3"
 }
