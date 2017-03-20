@@ -66,7 +66,25 @@ function handleMessage(request, sender, sendResponse) {
 		browser.tabs.query({currentWindow: true, active: true})
 		.then(function(tabs) {
 			browser.tabs.reload(tabs[0].id, {
+				bypassCache: false
+			});
+		});
+	}
+
+	if(request.gesture === "UDU") {
+		browser.tabs.query({currentWindow: true, active: true})
+		.then(function(tabs) {
+			browser.tabs.reload(tabs[0].id, {
 				bypassCache: true
+			});
+		});
+	}	
+
+	if(request.gesture === "UD") {
+		browser.tabs.query({currentWindow: true, active: true})
+		.then(function(tabs) {
+			browser.tabs.reload(tabs[0].id, {
+				bypassCache: false
 			});
 		});
 	}	
@@ -115,6 +133,23 @@ function handleMessage(request, sender, sendResponse) {
 		});
 	}
 
+	if(request.gesture === "LU") {
+		browser.tabs.query({currentWindow: true, active: true})
+		.then(function(tabs) {
+			browser.tabs.executeScript(tabs[0].id, {
+			  code: "window.scrollTo(0, 0);"
+			});
+		});
+	}
+
+	if(request.gesture === "LD") {
+		browser.tabs.query({currentWindow: true, active: true})
+		.then(function(tabs) {
+			browser.tabs.executeScript(tabs[0].id, {
+			  code: "window.scrollTo(0, document.body.scrollHeight);"
+			});
+		});
+	}
 	return true;
 }
 
