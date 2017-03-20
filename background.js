@@ -26,18 +26,26 @@ function setDefaults() {
 
 }
 
+var indexIncrement = 1;
+
+browser.tabs.onActivated.addListener(function(activeInfo) {
+	indexIncrement = 1;
+});
+
+
 function handleMessage(request, sender, sendResponse) {
 	if(request.gesture === "U" && request.targeturl !== undefined) {
 		browser.tabs.query({currentWindow: true, active: true})
 		.then(function(tabs) {
-			openLinkInTab(request.targeturl, true, tabs[0].index + 1);
+			openLinkInTab(request.targeturl, true, tabs[0].index + indexIncrement);
 		});
 	}
 
 	if(request.gesture === "D" && request.targeturl !== undefined) {
 		browser.tabs.query({currentWindow: true, active: true})
 		.then(function(tabs) {
-			openLinkInTab(request.targeturl, false, tabs[0].index + 1);
+			openLinkInTab(request.targeturl, false, tabs[0].index + indexIncrement);
+			indexIncrement++;
 		});
 	}
 
