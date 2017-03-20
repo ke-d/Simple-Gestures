@@ -80,6 +80,33 @@ function handleMessage(request, sender, sendResponse) {
 			});
 		});
 	}
+
+	if(request.gesture === "UL") {
+		browser.tabs.query({currentWindow: true, active: true})
+		.then(function(tabs) {
+			return browser.tabs.query({index: tabs[0].index - 1});
+		})
+		.then(function(tabs) {
+			return browser.tabs.update(tabs[0].id, {           
+			  active: true
+			}
+			);
+		});
+	}
+
+	if(request.gesture === "UR") {
+		browser.tabs.query({currentWindow: true, active: true})
+		.then(function(tabs) {
+			return browser.tabs.query({index: tabs[0].index + 1});
+		})
+		.then(function(tabs) {
+			return browser.tabs.update(tabs[0].id, {           
+			  active: true
+			}
+			);
+		});
+	}
+
 	return true;
 }
 
