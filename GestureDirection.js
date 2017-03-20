@@ -13,14 +13,14 @@ window.addEventListener("mousedown", function(e) {
     oldY = e.screenY;
     
     let node = e.target;
-    console.log(e.nodeName);
+    //console.log(e.nodeName);
     while(!node.hasAttribute("href")) {
-      
-      //console.log(node.nodeName);
-      node = node.parentElement;
       if(node.nodeName === "BODY" || node.nodeName === "HTML") {
         break;
       }
+      //console.log(node.nodeName);
+      node = node.parentElement;
+      
     }
     url = node.href;
     window.addEventListener("mousemove", getMouseDirection, false);
