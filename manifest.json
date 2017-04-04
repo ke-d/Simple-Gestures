@@ -13,7 +13,8 @@
   },
   "applications": {
     "gecko": {
-      "id": "Simple-Gestures@kennydo.com"
+      "id": "Simple-Gestures@kennydo.com",
+      "strict_min_version": "50.0"
     }
   },
   "options_ui": {
