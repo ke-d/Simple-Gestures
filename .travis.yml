@@ -1,0 +1,5 @@
+language: 
+env:
+  matrix:
+  - BROWSER=firefox EXT=xpi
+script: ./tools/make-${BROWSER}.sh all
