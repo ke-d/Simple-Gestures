@@ -2,4 +2,6 @@ language:
 env:
   matrix:
   - BROWSER=firefox EXT=xpi
-script: ./tools/make-${BROWSER}.sh all
+script: chmod a+x ./tools/make-${BROWSER}.sh all
+deploy:
+  skip_cleanup: true
