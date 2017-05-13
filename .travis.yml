@@ -1,7 +1,7 @@
-language: 
+language: node_js
 env:
   matrix:
   - BROWSER=firefox EXT=xpi
-script: chmod a+x ./tools/make-${BROWSER}.sh all
+script: chmod a+x ./tools/make-${BROWSER}.sh
 deploy:
   skip_cleanup: true
