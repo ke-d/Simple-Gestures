@@ -4,6 +4,9 @@ before_script:
 script: chmod a+x ./tools/buildFilesDev.sh
 before_deploy:
  - cd $TRAVIS_BUILD_DIR
+ - dir
+ - cd $TRAVIS_BUILD_DIR/builds/
+ - dir
 deploy:
   provider: releases
   prerelease: true
