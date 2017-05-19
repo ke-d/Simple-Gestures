@@ -1,6 +1,6 @@
 language: node_js
 
-script: chmod a+x ./tools/buildFilesDev.sh
+script: ./tools/buildFilesDev.sh
 deploy:
   provider: releases
   prerelease: true
