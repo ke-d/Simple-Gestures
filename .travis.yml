@@ -13,3 +13,5 @@ deploy:
     - $TRAVIS_BUILD_DIR/builds/Simple-Gestures_Firefox_Dev.xpi
     - $TRAVIS_BUILD_DIR/builds/Simple-Gestures_Chrome_Dev.dev
   skip_cleanup: true
+  on:
+    all_branches: true
