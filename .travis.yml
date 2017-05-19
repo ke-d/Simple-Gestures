@@ -2,6 +2,11 @@ language: node_js
 env:
   matrix:
   - BROWSER=firefox EXT=xpi
-script: chmod a+x ./tools/make-${BROWSER}.sh
+script: chmod a+x ./tools/buildFilesDev.sh
 deploy:
+  provider: releases
+  api_key: "GITHUB OAUTH TOKEN"
+  file: "FILE TO UPLOAD"
   skip_cleanup: true
+  on:
+    tags: true
