@@ -1,5 +1,8 @@
 language: node_js
-
+before_install:
+ - chmod +x gradlew
+before_script:
+ - cd $TRAVIS_BUILD_DIR
 script: ./tools/buildFilesDev.sh
 deploy:
   provider: releases
