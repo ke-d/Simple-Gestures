@@ -1,11 +1,12 @@
-language: node_js
+#language: node_js
 before_script:
  - cd $TRAVIS_BUILD_DIR
 script: chmod a+x ./tools/buildFilesDev.sh
 before_deploy:
+ - dir
  - cd $TRAVIS_BUILD_DIR
  - dir
- - cd $TRAVIS_BUILD_DIR/builds/
+ - cd builds/
  - dir
 deploy:
   provider: releases
