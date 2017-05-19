@@ -1,7 +1,7 @@
 echo "Building"
 
 EXTENSIONNAME="Simple-Gestures"
-DES=$TRAVIS_BUILD_DIR/builds
+DES=builds
 DATETIME=$(date +"%m%d%y"_%H%M)
 FIREFOXFILENAME=${EXTENSIONNAME}_Firefox_Dev
 CHROMEFILENAME=${EXTENSIONNAME}_Chrome_Dev
