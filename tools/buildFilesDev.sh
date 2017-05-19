@@ -3,8 +3,8 @@ echo "Building"
 EXTENSIONNAME="Simple-Gestures"
 DES=builds
 DATETIME=$(date +"%m%d%y"_%H%M)
-FIREFOXFILENAME=${EXTENSIONNAME}_Firefox_Dev_${DATETIME}
-CHROMEFILENAME=${EXTENSIONNAME}_Chrome_Dev_${DATETIME}
+FIREFOXFILENAME=${EXTENSIONNAME}_Firefox_Dev
+CHROMEFILENAME=${EXTENSIONNAME}_Chrome_Dev
 
 rmdir -rf $DES
 mkdir -p $DES
