@@ -5,11 +5,11 @@ DES=builds
 DATETIME=$(date +"%m%d%y"_%H%M)
 FIREFOXFILENAME=${EXTENSIONNAME}_Firefox_Dev
 CHROMEFILENAME=${EXTENSIONNAME}_Chrome_Dev
-dir
+
 rmdir -rf $DES
 mkdir -p $DES
 cd src/
-dir
+
 zip -r ${FIREFOXFILENAME}.xpi *
 mv ${FIREFOXFILENAME}.xpi ../$DES/
 
