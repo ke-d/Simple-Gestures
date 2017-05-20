@@ -22,7 +22,7 @@
   	"open_in_tab" : true
   },
   "permissions": [
-    "storage"
+    "storage",
     "<all_urls>"
   ],
   "content_scripts": [
