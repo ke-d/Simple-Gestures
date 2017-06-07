@@ -1,6 +1,7 @@
+#!/usr/bin/env bash
 echo "Building"
 
-EXTENSIONNAME="Simple-Gestures"
+EXTENSIONNAME="Cookie-AutoDelete"
 DES=builds
 if [ -z "$TRAVIS_TAG" ]
  then TRAVIS_TAG=$(date +"%m%d%y"_%H%M)
@@ -9,9 +10,8 @@ if [ -z "$TRAVIS_TAG" ]
 FIREFOXFILENAME=${EXTENSIONNAME}_Firefox_Dev_${TRAVIS_TAG}
 CHROMEFILENAME=${EXTENSIONNAME}_Chrome_Dev_${TRAVIS_TAG}
 
-rmdir -rf $DES
 mkdir -p $DES
-cd src/
+cd extension/
 
 zip -r ${FIREFOXFILENAME}.xpi *
 mv ${FIREFOXFILENAME}.xpi ../$DES/
