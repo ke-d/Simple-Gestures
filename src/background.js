@@ -26,11 +26,12 @@ browser.tabs.onActivated.addListener(function(activeInfo) {
 
 function handleMessage(request, sender, sendResponse) {
 	browser.tabs.query({currentWindow: true, active: true})
-	.then(function(tabs) {
+	.then((tabs) => {
 		if(request.gesture === "U" && request.targeturl !== undefined) {
 			browser.tabs.create({
 				url: request.targeturl,
 				active: true,
+				cookieStoreId: tabs[0].cookieStoreId,
 				index: tabs[0].index + indexIncrement
 			});
 		}
@@ -39,6 +40,7 @@ function handleMessage(request, sender, sendResponse) {
 			browser.tabs.create({
 				url: request.targeturl,
 				active: false,
+				cookieStoreId: tabs[0].cookieStoreId,
 				index: tabs[0].index + indexIncrement
 			});
 			indexIncrement++;

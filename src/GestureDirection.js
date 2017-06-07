@@ -36,8 +36,8 @@ if(rightclick) {
     window.removeEventListener("contextmenu", stopContextMenu);
   }
   if(direction !== "") {
-    console.log(direction);
-    console.log(url);
+    // console.log(direction);
+    // console.log(url);
     browser.runtime.sendMessage({
       gesture: direction,
       targeturl: url
