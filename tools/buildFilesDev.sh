@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 echo "Building"
 
-EXTENSIONNAME="Cookie-AutoDelete"
+EXTENSIONNAME="Simple-Gestures"
 DES=builds
 if [ -z "$TRAVIS_TAG" ]
  then TRAVIS_TAG=$(date +"%m%d%y"_%H%M)
