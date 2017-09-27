@@ -8,7 +8,7 @@ function onStartUp() {
 }
 
 
-//Set the defaults 
+//Set the defaults
 function setDefaults() {
 	browser.storage.local.clear()
 	.then(function() {
@@ -32,7 +32,8 @@ function handleMessage(request, sender, sendResponse) {
 				url: request.targeturl,
 				active: true,
 				cookieStoreId: tabs[0].cookieStoreId,
-				index: tabs[0].index + indexIncrement
+				index: tabs[0].index + indexIncrement,
+				openerTabId: tabs[0].id
 			});
 		}
 
@@ -41,7 +42,8 @@ function handleMessage(request, sender, sendResponse) {
 				url: request.targeturl,
 				active: false,
 				cookieStoreId: tabs[0].cookieStoreId,
-				index: tabs[0].index + indexIncrement
+				index: tabs[0].index + indexIncrement,
+				openerTabId: tabs[0].id
 			});
 			indexIncrement++;
 		}
@@ -66,19 +68,19 @@ function handleMessage(request, sender, sendResponse) {
 			browser.tabs.reload(tabs[0].id, {
 				bypassCache: true
 			});
-		}	
+		}
 
 		if(request.gesture === "UD") {
 			browser.tabs.reload(tabs[0].id, {
 				bypassCache: false
 			});
-		}	
+		}
 
 		if(request.gesture === "L") {
 			browser.tabs.executeScript(tabs[0].id, {
 				code: "window.history.back()"
 			});
-		}	
+		}
 
 		if(request.gesture === "R") {
 			browser.tabs.executeScript(tabs[0].id, {
@@ -89,7 +91,7 @@ function handleMessage(request, sender, sendResponse) {
 		if(request.gesture === "UL") {
 			browser.tabs.query({index: tabs[0].index - 1})
 			.then(function(tabs) {
-				return browser.tabs.update(tabs[0].id, {           
+				return browser.tabs.update(tabs[0].id, {
 					active: true
 				}
 				);
@@ -99,7 +101,7 @@ function handleMessage(request, sender, sendResponse) {
 		if(request.gesture === "UR") {
 			browser.tabs.query({index: tabs[0].index + 1})
 			.then(function(tabs) {
-				return browser.tabs.update(tabs[0].id, {           
+				return browser.tabs.update(tabs[0].id, {
 					active: true
 				}
 				);
@@ -124,4 +126,3 @@ function handleMessage(request, sender, sendResponse) {
 browser.runtime.onMessage.addListener(handleMessage);
 
 onStartUp();
-
