@@ -11,7 +11,7 @@ window.addEventListener("mousedown", function(e) {
     window.addEventListener("contextmenu", stopContextMenu);
     oldX = e.screenX;
     oldY = e.screenY;
-    
+
     let node = e.target;
     //console.log(e.nodeName);
     while(!node.hasAttribute("href")) {
@@ -20,17 +20,16 @@ window.addEventListener("mousedown", function(e) {
       }
       //console.log(node.nodeName);
       node = node.parentElement;
-      
+
     }
     url = node.href;
     window.addEventListener("mousemove", getMouseDirection, false);
-    textChainNode.style.display = "";
   }
 });
 
 window.addEventListener("mouseup", function(e) {
 if(rightclick) {
-  
+
   window.removeEventListener("mousemove", getMouseDirection, false);
   if(direction === "") {
     window.removeEventListener("contextmenu", stopContextMenu);
@@ -43,24 +42,14 @@ if(rightclick) {
       targeturl: url
     });
   }
-    
+
   }
-  textChainNode.style.display = "none";
-  
+
 });
 var url = "";
 var rightclick;
 var direction = "";
 
-var textChainNode = document.createElement("span");
-textChainNode.id = "directionChain";
-//textChainNode.style.all = "initial";
-textChainNode.style.position = "fixed";
-textChainNode.style.bottom = "2px";
-textChainNode.style.right = "5px";
-textChainNode.style.font = "1rem arial,sans-serif"; 
-document.body.appendChild(textChainNode);
-textChainNode.style.display = "none";
 
 
 var oldX = 0;
@@ -84,7 +73,7 @@ function getMouseDirection(e) {
   var distX = (subX > 0 ? subX : (-subX));
   var distY= (subY > 0 ? subY : (-subY));
   var currentDirection;
-  
+
   if(distX < 10 && distY < 10) {
     return;
   }
@@ -99,7 +88,4 @@ function getMouseDirection(e) {
   oldX = x;
   oldY = y;
 
-  textChainNode.textContent = direction;
-  //textChainNode.appendChild(document.createTextNode(direction));
 }
-
