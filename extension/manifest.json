@@ -30,11 +30,11 @@
       "matches": ["<all_urls>"],
       "js": [
         "global_files/browser-polyfill.js",
-        "GestureDirection.js"      
+        "GestureDirection.js"
       ]
     }
-  ],  
+  ],
   "manifest_version": 2,
   "name": "Simple Gestures",
-  "version": "0.5.7"
+  "version": "0.5.8"
 }
