@@ -17,12 +17,6 @@ function setDefaults() {
 
 }
 
-var indexIncrement = 1;
-
-browser.tabs.onActivated.addListener(function(activeInfo) {
-	indexIncrement = 1;
-});
-
 
 function handleMessage(request, sender, sendResponse) {
 	browser.tabs.query({currentWindow: true, active: true})
@@ -32,7 +26,6 @@ function handleMessage(request, sender, sendResponse) {
 				url: request.targeturl,
 				active: true,
 				cookieStoreId: tabs[0].cookieStoreId,
-				index: tabs[0].index + indexIncrement,
 				openerTabId: tabs[0].id
 			});
 		}
@@ -42,10 +35,8 @@ function handleMessage(request, sender, sendResponse) {
 				url: request.targeturl,
 				active: false,
 				cookieStoreId: tabs[0].cookieStoreId,
-				index: tabs[0].index + indexIncrement,
 				openerTabId: tabs[0].id
 			});
-			indexIncrement++;
 		}
 
 		if(request.gesture === "LR") {
@@ -54,8 +45,11 @@ function handleMessage(request, sender, sendResponse) {
 			});
 		}
 
+		// Switch to the tab before then delete the current tab
 		if(request.gesture === "DR") {
-			browser.tabs.remove(tabs[0].id);
+			browser.tabs.remove(tabs[0].id)
+			.then(() => browser.tabs.query({currentWindow: true, index: tabs[0].index - 1}))
+			.then((tabs) => browser.tabs.update(tabs[0].id, {active: true}));
 		}
 
 		if(request.gesture === "UD") {
