@@ -52,6 +52,17 @@ function handleMessage(request, sender, sendResponse) {
 			.then((tabs) => browser.tabs.update(tabs[0].id, {active: true}));
 		}
 
+		if(request.gesture === "DL") {
+			browser.sessions.getRecentlyClosed({maxResults: 1})
+			.then(sessions => sessions[0])
+			.then(session => {
+				const sessionId = session.tab.sessionId || session.window.sessionId;
+				browser.sessions.restore(
+					sessionId
+				);
+			});
+		}
+
 		if(request.gesture === "UD") {
 			browser.tabs.reload(tabs[0].id, {
 				bypassCache: false
